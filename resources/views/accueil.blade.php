@@ -1,0 +1,2 @@
+toto
+{{ csrf_token() }}
