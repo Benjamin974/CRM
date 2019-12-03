@@ -14,6 +14,6 @@ class Adresses extends Model
     
     public function client()
     {
-      return  $this->belongsTo(Clients::class, 'id_adresse');
+      return  $this->hasOne(Clients::class, 'id_adresse');
     }
 }

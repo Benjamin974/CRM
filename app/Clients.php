@@ -22,4 +22,13 @@ class Clients extends Model
       return  $this->hasMany(Contacts::class, 'id_client');
     }
 
+    public function projets()
+    {
+      return  $this->hasMany(Projets::class, 'id_client');
+    }
+
+    public function commentaires()
+    {
+      return  $this->hasMany(Commentaires_clients::class, 'id_client');
+    }
 }

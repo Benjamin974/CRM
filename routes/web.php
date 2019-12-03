@@ -12,10 +12,15 @@
 */
 
 
-
 Route::prefix('/api')->group(function () {
     Route::prefix('/clients')->group(function () {
         Route::get('/', 'ClientsController@index');
         Route::post('/', 'ClientsController@addClient');
     });
+
+    Route::prefix('/projets')->group(function () {
+        Route::post('/', 'ProjetsController@index');
+    });
 });
+
+    

@@ -32,11 +32,13 @@ class LienForeignKey extends Migration
 
         });
 
+
         Schema::table('contacts', function (Blueprint $table) {
             $table->unsignedBigInteger('id_client');
             $table->foreign('id_client')->references('id')->on('clients');
 
         });
+
 
     }
 
@@ -62,6 +64,8 @@ class LienForeignKey extends Migration
             $table->dropIfExists('id_client');
         
         });
+
+
 
         Schema::dropIfExists('adresses');
 

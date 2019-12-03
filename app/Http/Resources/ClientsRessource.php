@@ -17,11 +17,16 @@ class ClientsRessource extends JsonResource
 
         $adresse = new AdressesRessource($this->whenLoaded('adresse'));
         $contacts = ContactsRessource::collection($this->whenLoaded('contacts'));
+        $projets = ProjetsRessource::collection($this->whenLoaded('projets'));
+        $commentaires = CommentairesRessource::collection($this->whenLoaded('commentaires'));
+
         return [
             'id' => $this->id,
             'nomClient' => $this->nomClient,
             'adresse' =>$adresse,
-            'contacts' =>$contacts
+            'contacts' =>$contacts,
+            'projets' => $projets,
+            'commentaires' => $commentaires
         ];
     }
 }
