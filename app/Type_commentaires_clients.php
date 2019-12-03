@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type_commentaires_clients extends Model
 {
-    protected $table = "types_commentaires_clients";
+    protected $table = "type_commentaires_clients";
 
     protected $fillable = ["id", "type"];
 

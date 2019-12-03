@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/', function() {
+    return view('app');
+});
 
 Route::prefix('/api')->group(function () {
     Route::prefix('/clients')->group(function () {
