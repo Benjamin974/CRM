@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function() {
-    return view('app');
-});
 
 Route::prefix('/api')->group(function () {
     Route::prefix('/clients')->group(function () {
@@ -25,5 +22,8 @@ Route::prefix('/api')->group(function () {
         Route::post('/', 'ProjetsController@index');
     });
 });
+
+Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');
+
 
     

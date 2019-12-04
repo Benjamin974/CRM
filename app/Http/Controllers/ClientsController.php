@@ -18,14 +18,15 @@ class ClientsController extends Controller
     function index()
     {
         $out = Clients::with([
-            "adresse", "contacts", "projets", 
-            "commentaires" => function($q) {
-                $q->with('type'); 
+            "adresse", "contacts", "projets",
+            "commentaires" => function ($q) {
+                $q->with('type');
             }
         ])->get();
 
         return ClientsRessource::collection($out);
     }
+
 
 
 
@@ -44,9 +45,6 @@ class ClientsController extends Controller
                 'adresse' => 'required',
                 'code_postal' => 'required',
                 'ville' => 'required',
-                'nomProjet' => 'required',
-                'commentaire' => 'required',
-                'type' => 'required'
 
             ],
             [
@@ -72,23 +70,35 @@ class ClientsController extends Controller
             'ville' => $validatedData['ville']
         ];
 
-        $tabProjet = [
-            'nom' => $validatedData['nomProjet']
-        ];
 
-
-        DB::transaction(function () use ($tabAdresse, $tabClient, $tabContact, $tabProjet) {
+        $return = [];
+        DB::transaction(function () use ($tabAdresse, $tabClient, $tabContact, &$return) {
 
             $adresse = Adresses::create($tabAdresse);
             $client = $adresse->client()->create($tabClient);
             $contact = $client->contacts()->create($tabContact);
-            $projet = $client->projets()->create($tabProjet);
+            $return = $client;
         });
 
+        $out = Clients::with([
+            "adresse", "contacts", "projets",
+            "commentaires" => function ($q) {
+                $q->with('type');
+            }
+        ])->where('id', $return->id)->first();
 
+        return new ClientsRessource($out);
+    }
 
+    function get($id)
+    {
+        $out = Clients::with([
+            "adresse", "contacts", "projets",
+            "commentaires" => function ($q) {
+                $q->with('type');
+            }
+        ])->where('id', $id)->get();
 
-
-        return json_encode($validatedData);
+        return new ClientsRessource($out);
     }
 }
