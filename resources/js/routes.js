@@ -5,10 +5,6 @@ import Home from './components/Home';
 import About from './components/About';
 import Client from './components/Client';
 
-import Vuetify from 'vuetify/lib';
-import 'vuetify/dist/vuetify.min.css'
-Vue.use(Vuetify);
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -28,7 +24,8 @@ routes: [
         path: '/client',
         name: 'client',
         component: Client
-    }
+    },
+
 ]
 });
 

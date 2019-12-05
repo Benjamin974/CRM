@@ -81,10 +81,7 @@ class ClientsController extends Controller
         });
 
         $out = Clients::with([
-            "adresse", "contacts", "projets",
-            "commentaires" => function ($q) {
-                $q->with('type');
-            }
+            "adresse", "contacts"
         ])->where('id', $return->id)->first();
 
         return new ClientsRessource($out);
